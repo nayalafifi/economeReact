@@ -1,0 +1,74 @@
+/* Profile Container */
+.profile-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-container h2 {
+    font-size: 1.8rem;
+    color: #264653;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 0.5rem;
+  }
+  
+  .profile-details {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  
+  .profile-info, .finance-stats {
+    flex: 1;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+  }
+  
+  .profile-info h3, .finance-stats h3 {
+    color: #2a9d8f;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .profile-info p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .finance-stats .stat {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .recent-activity {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+  }
+  
+  .recent-activity h3 {
+    color: #2a9d8f;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .recent-activity ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .recent-activity li {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #333;
+  }
+  
