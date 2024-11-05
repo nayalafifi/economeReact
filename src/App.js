@@ -8,9 +8,11 @@ import './App.css';
 function App() {
   const [currentPage, setCurrentPage] = useState('login');
 
+  const navigateToDashboard = () => setCurrentPage('dashboard');
+
   return (
     <div className="App">
-      {currentPage === 'login' && <Login />}
+      {currentPage === 'login' && <Login onLoginSuccess={navigateToDashboard} />}
       {currentPage === 'dashboard' && <Dashboard navigateTo={setCurrentPage} />}
       {currentPage === 'profile' && <Profile />}
       {currentPage === 'GoalSetting' && <GoalSetting />}
