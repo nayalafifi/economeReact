@@ -1,70 +1,94 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# EconoMe - React Financial Dashboard
 
-## Available Scripts
+### Project Description
 
-In the project directory, you can run:
+EconoMe is a financial management dashboard built using React. This application provides users with a clean and organized interface to view their financial summary, manage expenses, and set personal goals. The sidebar navigation allows users to switch between the Dashboard, Profile, Marketplace, and Settings sections, each presenting different functionalities and insights.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Component Documentation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Below is a breakdown of each component in the EconoMe project.
 
-### `npm test`
+1. **App.js**:  
+   - **Functionality**: This is the main component that controls navigation across the app’s primary pages (Dashboard, Profile, GoalSetting).
+   - **State**: `useState` is used to manage the `currentPage`, determining which page is displayed based on the sidebar selections.
+   
+2. **Dashboard.js**:
+   - **Functionality**: This component displays the main dashboard view, including financial summaries, goal tracking, weekly expenses, and a sidebar for navigation.
+   - **Props**: `navigateTo` is passed down from `App.js` to allow users to switch between different pages.
+   
+3. **Profile.js**:
+   - **Functionality**: Shows user profile information, including name, email, membership details, and a summary of financial stats.
+   
+4. **GoalSetting.js**:
+   - **Functionality**: Allows users to set and track financial goals.
+   
+5. **Sidebar (part of Dashboard.js)**:
+   - **Functionality**: Provides navigation to different parts of the app. Users can click options to navigate to the Dashboard, Profile, Marketplace, or Settings.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+### Setup Instructions
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Follow these instructions to set up the EconoMe project locally.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/nayalafifi/economeReact.git
+   cd economeReact
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-### `npm run eject`
+3. **Start the Development Server**:
+   ```bash
+   npm start
+   ```
+   This will start the React development server. Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. **Build the App for Production**:
+   To create a production build, run:
+   ```bash
+   npm run build
+   ```
+   This will generate a `build` folder with optimized files for deployment.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Development Process
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Design Decisions
 
-## Learn More
+1. **Navigation with State Management**:
+   - Instead of using a routing library like React Router, we opted for a simple `useState` approach to manage page navigation. This was chosen to keep the project lightweight and straightforward for educational purposes.
+   
+2. **Component Structure**:
+   - Each major section of the app (Dashboard, Profile, GoalSetting) is separated into its own component. This modular approach improves readability and maintainability, allowing each section to be developed and tested independently.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. **Styling and Layout**:
+   - CSS files are used for styling each component (`App.css`, `dashboard.css`, etc.). This keeps component-specific styles separate, enhancing maintainability and making it easy to find and modify specific styles.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Technical Choices
 
-### Code Splitting
+1. **React**:
+   - React was chosen for its component-based architecture, which makes it easy to build and manage each section of the dashboard independently.
+   
+2. **CSS Modules**:
+   - Separate CSS files for each component help in managing styles in a modular way, making sure styles don’t clash across components.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+3. **State Management with `useState`**:
+   - The simple state management solution with `useState` is sufficient for this project, given the minimal navigation requirements. If the project were to expand, using a library like Redux or React Context could be considered.
 
-### Analyzing the Bundle Size
+#### AI Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. **Component Structure and State Management**:
+   - AI assistance was used to outline the structure of the components and to simplify state management for navigation between the different sections of the app. 
+   
+2. **Styling and Design Suggestions**:
+   - AI was also used to provide suggestions on the layout and organization of CSS classes to ensure the design is consistent and visually appealing.
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
