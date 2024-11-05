@@ -1,0 +1,19 @@
+{
+    "users": [
+      {
+        "user_id": 1,
+        "name": "John Doe",
+        "email": "johndoe@example.com",
+        "dob": "1985-06-15",
+        "income": 55000
+      },
+      {
+        "user_id": 2,
+        "name": "Jane Smith",
+        "email": "janesmith@example.com",
+        "dob": "1990-08-22",
+        "income": 72000
+      }
+    ]
+  }
+  
