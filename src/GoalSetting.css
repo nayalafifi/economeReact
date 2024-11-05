@@ -1,58 +1,49 @@
-.goal-setting-layout {
-    margin-left: 250px; /* Align with main content area */
-    padding: 2rem;
-    font-family: Arial, sans-serif; /* Consistency in font */
+.goal-setting-container {
+    background-color: #ffffff; /* white background similar to register-form and profile */
+    padding: 1.5rem; /* consistent padding */
+    border-radius: 8px; /* rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* consistent shadow */
+    margin: 2rem; /* gives some space around the form */
   }
   
-  /* Form styling consistent with the dashboard theme */
+  /* Form styling consistent with the general app theme */
   .goal-form {
-    background-color: #ffffff;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
   }
   
   .goal-input,
   .goal-button {
-    padding: 10px;
-    margin-top: 10px; /* Consistent spacing */
-    font-size: 1rem; /* Matching font size */
-    border-radius: 4px;
+    padding: 10px; /* comfortable padding */
+    margin-top: 10px; /* space between elements */
+    font-size: 1rem; /* legible font size */
+    border-radius: 5px; /* rounded edges */
   }
   
   .goal-input {
-    border: 1px solid #ccc; /* Subtle borders */
+    border: 2px solid #ccc; /* subtle border */
   }
   
   .goal-button {
-    background-color: #3b82f6; /* Button color from dashboard */
-    color: white;
-    border: none;
-    cursor: pointer;
+    background-color: #2a9d8f; /* teal background color from header */
+    color: white; /* text color */
+    border: none; /* no border */
+    cursor: pointer; /* pointer cursor on hover */
   }
   
-  /* Styling for goals list, matching card styles */
-  .goal-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-  }
-  
-  .goal-item {
-    background-color: #ffffff;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-  
-  /* Maintain hover effects for interaction feedback */
+  /* Hover and focus effects for interactivity */
   .goal-button:hover,
   .goal-input:focus {
-    filter: brightness(90%);
+    background-color: #264653; /* darker background on hover/focus */
+    color: white; /* ensure text is white on focus */
+    outline: none; /* no outline */
   }
-
+  
+  /* Responsive design for alignment and spacing */
+  @media (max-width: 768px) {
+    .goal-setting-container {
+      margin: 1rem;
+      padding: 1rem;
+    }
+  }
+  
