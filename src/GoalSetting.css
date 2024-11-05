@@ -1,48 +1,69 @@
-.goal-setting-container {
-    background-color: #ffffff; /* white background similar to register-form and profile */
-    padding: 1.5rem; /* consistent padding */
-    border-radius: 8px; /* rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* consistent shadow */
-    margin: 2rem; /* gives some space around the form */
-  }
-  
-  /* Form styling consistent with the general app theme */
-  .goal-form {
+.goal-setting-layout {
     display: flex;
     flex-direction: column;
+    justify-content: center; /* Center form vertically in the view */
+    align-items: center; /* Center form horizontally */
+    min-height: 100vh; /* Full viewport height */
+    padding: 1rem; /* Padding around the form */
+    background-color: #f4f4f9; /* Same as main-content area */
+    width: 100%; /* Full width */
   }
   
-  .goal-input,
-  .goal-button {
-    padding: 10px; /* comfortable padding */
-    margin-top: 10px; /* space between elements */
-    font-size: 1rem; /* legible font size */
-    border-radius: 5px; /* rounded edges */
+  .goal-form {
+    width: 100%; /* Form takes full width of its container */
+    max-width: 600px; /* Maximum width to keep it readable */
+    background-color: #ffffff;
+    padding: 2rem; /* Increased padding for better spacing */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   .goal-input {
-    border: 2px solid #ccc; /* subtle border */
+    width: 100%;
+    padding: 1rem; /* Larger padding for larger touch area */
+    margin-bottom: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 1.2rem; /* Larger font size for readability */
+  }
+  
+  .goal-input:focus {
+    border-color: #2a9d8f;
+    outline: none;
   }
   
   .goal-button {
-    background-color: #2a9d8f; /* teal background color from header */
-    color: white; /* text color */
-    border: none; /* no border */
-    cursor: pointer; /* pointer cursor on hover */
+    width: 100%;
+    padding: 1rem; /* Larger padding for a bigger button */
+    background-color: #2a9d8f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2rem; /* Larger font size for visibility */
   }
   
-  /* Hover and focus effects for interactivity */
-  .goal-button:hover,
-  .goal-input:focus {
-    background-color: #264653; /* darker background on hover/focus */
-    color: white; /* ensure text is white on focus */
-    outline: none; /* no outline */
+  .goal-button:hover {
+    background-color: #264653;
   }
   
-  /* Responsive design for alignment and spacing */
+  .goal-item {
+    color: white; /* White text for better contrast */
+    background-color: #2a9d8f; /* Consistent shade of blue as used in the button */
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem; /* Space between items */
+    text-align: center;
+    font-size: 1.2rem; /* Larger text */
+  }
+  
   @media (max-width: 768px) {
-    .goal-setting-container {
-      margin: 1rem;
+    .goal-setting-layout {
+      padding: 0.5rem;
+    }
+  
+    .goal-form {
       padding: 1rem;
     }
   }

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import './GoalSetting.css';
-
-
+import './GoalSetting.css'; 
 function GoalSetting() {
     const [goals, setGoals] = useState([]);
     const [newGoal, setNewGoal] = useState({
@@ -9,27 +7,28 @@ function GoalSetting() {
         targetAmount: '',
         deadline: ''
     });
+
     const handleChange = (e) => {
         setNewGoal({ ...newGoal, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = (event) => {
+        event.preventDefault();
         if (!newGoal.name || !newGoal.targetAmount || !newGoal.deadline) return;
         setGoals([...goals, newGoal]);
-        setNewGoal({ name: '', targetAmount: '', deadline: '' }); // Reset form
+        setNewGoal({ name: '', targetAmount: '', deadline: '' }); // Reset form after submission
     };
 
     return (
-        <div>
-            <h2>Set Your Financial Goals</h2>
-            <form onSubmit={handleSubmit}>
+        <div className="goal-setting-layout">
+            <form onSubmit={handleSubmit} className="goal-form">
                 <input
                     type="text"
                     name="name"
                     placeholder="Goal name"
                     value={newGoal.name}
                     onChange={handleChange}
+                    className="goal-input"
                     required
                 />
                 <input
@@ -38,6 +37,7 @@ function GoalSetting() {
                     placeholder="Target amount"
                     value={newGoal.targetAmount}
                     onChange={handleChange}
+                    className="goal-input"
                     required
                 />
                 <input
@@ -45,15 +45,18 @@ function GoalSetting() {
                     name="deadline"
                     value={newGoal.deadline}
                     onChange={handleChange}
+                    className="goal-input"
                     required
                 />
-                <button type="submit">Add Goal</button>
+                <button type="submit" className="goal-button">Add Goal</button>
             </form>
-            <ul>
+            <div className="goal-list">
                 {goals.map((goal, index) => (
-                    <li key={index}>{goal.name} - ${goal.targetAmount} by {goal.deadline}</li>
+                    <div key={index} className="goal-item">
+                        {goal.name} - ${goal.targetAmount} by {goal.deadline}
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 }
