@@ -3,57 +3,49 @@ import './dashboard.css';
 
 const Dashboard = ({ navigateTo }) => {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh' }}>
+    <div className="dashboard">
       {/* Sidebar */}
-      <aside style={{ width: '250px', borderRight: '1px solid #e5e7eb', padding: '1rem' }}>
-        <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '2rem' }}>EconoMe</h1>
-        <nav>
-          <ul style={{ listStyle: 'none', padding: 0 }}>
-            <li style={{ marginBottom: '0.5rem' }}>
-              <a href="#" style={{ display: 'block', padding: '0.5rem', backgroundColor: '#3b82f6', color: 'white', borderRadius: '0.25rem', textDecoration: 'none' }}>Dashboard</a>
-            </li>
-            <li style={{ marginBottom: '0.5rem' }}>
-              <a href="#" style={{ display: 'block', padding: '0.5rem', color: '#6b7280', textDecoration: 'none' }}>Your Profile</a>
-            </li>
-            <li style={{ marginBottom: '0.5rem' }}>
-              <a href="#" style={{ display: 'block', padding: '0.5rem', color: '#6b7280', textDecoration: 'none' }}>MarketPlace</a>
-            </li>
-            <li style={{ marginBottom: '0.5rem' }}>
-              <a href="#" style={{ display: 'block', padding: '0.5rem', color: '#6b7280', textDecoration: 'none' }}>Settings</a>
-            </li>
+      <aside className="sidebar">
+        <h1 className="logo">EconoMe</h1>
+        <nav className="nav">
+          <ul>
+            <li><a href="#" className="nav-link active">Dashboard</a></li>
+            <li><a href="#" className="nav-link">Your Profile</a></li>
+            <li><a href="#" className="nav-link">MarketPlace</a></li>
+            <li><a href="#" className="nav-link">Settings</a></li>
           </ul>
         </nav>
       </aside>
 
       {/* Main Content */}
-      <main style={{ flex: 1, padding: '1rem' }}>
-        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 'semibold' }}>Dashboard</h2>
-          <button style={{ padding: '0.5rem 1rem', backgroundColor: '#3b82f6', color: 'white', border: 'none', borderRadius: '0.25rem', cursor: 'pointer' }}>Add widget</button>
+      <main className="main-content">
+        <header className="header">
+          <h2>Dashboard</h2>
+          <button className="btn btn-primary">Add widget</button>
         </header>
 
         {/* Progress Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+        <div className="card-grid">
           {['Budget', 'Goal 1', 'Goal 2'].map((title, index) => (
-            <div key={index} style={{ border: '1px solid #e5e7eb', borderRadius: '0.5rem', padding: '1rem' }}>
-              <h3 style={{ fontSize: '1rem', fontWeight: 'semibold', marginBottom: '0.5rem' }}>{title}</h3>
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '150px' }}>
-                <span style={{ fontSize: '2rem', fontWeight: 'bold' }}>{[25, 79, 52][index]}%</span>
+            <div key={index} className="card">
+              <h3 className="card-title">{title}</h3>
+              <div className="card-content">
+                <span className="percentage">{[25, 79, 52][index]}%</span>
               </div>
             </div>
           ))}
         </div>
 
         {/* Expenses Chart */}
-        <div style={{ border: '1px solid #e5e7eb', borderRadius: '0.5rem', padding: '1rem', marginBottom: '2rem' }}>
-          <h3 style={{ fontSize: '1rem', fontWeight: 'semibold', marginBottom: '0.5rem' }}>Expenses</h3>
-          <div style={{ height: '200px', backgroundColor: '#f3f4f6', borderRadius: '0.25rem' }}></div>
+        <div className="card">
+          <h3 className="card-title">Expenses</h3>
+          <div className="chart-placeholder"></div>
         </div>
 
         {/* Weekly Expenses Table */}
-        <div style={{ border: '1px solid #e5e7eb', borderRadius: '0.5rem', padding: '1rem' }}>
-          <h3 style={{ fontSize: '1rem', fontWeight: 'semibold', marginBottom: '0.5rem' }}>Weekly Expenses</h3>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <div className="card">
+          <h3 className="card-title">Weekly Expenses</h3>
+          <table className="table">
             <thead>
               <tr>
                 <th>Week</th>
@@ -64,24 +56,16 @@ const Dashboard = ({ navigateTo }) => {
             </thead>
             <tbody>
               <tr>
-                <td style={{ padding: '0.5rem', borderBottom: '1px solid #e5e7eb' }}>Week 12</td>
-                <td style={{ padding: '0.5rem', borderBottom: '1px solid #e5e7eb' }}>
-                  <span style={{ display: 'inline-block', padding: '0.25rem 0.5rem', backgroundColor: '#fee2e2', color: '#dc2626', borderRadius: '9999px', fontSize: '0.75rem' }}>Overdue</span>
-                </td>
-                <td style={{ padding: '0.5rem', borderBottom: '1px solid #e5e7eb' }}>01 Dec 2023</td>
-                <td style={{ padding: '0.5rem', borderBottom: '1px solid #e5e7eb', textAlign: 'right' }}>
-                  <button style={{ padding: '0.25rem 0.5rem', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', color: '#3b82f6' }}>Edit</button>
-                </td>
+                <td>Week 12</td>
+                <td><span className="badge badge-overdue">Overdue</span></td>
+                <td>01 Dec 2023</td>
+                <td><button className="btn btn-link">Edit</button></td>
               </tr>
               <tr>
-                <td style={{ padding: '0.5rem' }}>Week 11</td>
-                <td style={{ padding: '0.5rem' }}>
-                  <span style={{ display: 'inline-block', padding: '0.25rem 0.5rem', backgroundColor: '#dcfce7', color: '#16a34a', borderRadius: '9999px', fontSize: '0.75rem' }}>Completed</span>
-                </td>
-                <td style={{ padding: '0.5rem' }}>11 Dec 2024</td>
-                <td style={{ padding: '0.5rem', textAlign: 'right' }}>
-                  <button style={{ padding: '0.25rem 0.5rem', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', color: '#3b82f6' }}>Edit</button>
-                </td>
+                <td>Week 11</td>
+                <td><span className="badge badge-completed">Completed</span></td>
+                <td>11 Dec 2024</td>
+                <td><button className="btn btn-link">Edit</button></td>
               </tr>
             </tbody>
           </table>
