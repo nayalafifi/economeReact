@@ -1,8 +1,3 @@
-
-// App.js
-import React, { useState } from 'react';
-import Dashboard from './dashboard';
-import Profile from './Profile';
 import './App.css';
 
 function App() {
