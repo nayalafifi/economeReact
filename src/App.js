@@ -1,19 +1,17 @@
 // App.js
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import Dashboard from './dashboard';
+import Profile from './Profile';
+import './App.css';
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('dashboard');
+
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          {/* Redirect root path to /dashboard */}
-          <Route path="/" element={<Navigate to="/index" />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="App">
+      {currentPage === 'dashboard' && <Dashboard navigateTo={setCurrentPage} />}
+      {currentPage === 'profile' && <Profile />}
+    </div>
   );
 }
 
