@@ -20,6 +20,9 @@ const Dashboard = ({ navigateTo }) => {
             <li onClick={() => navigateTo('settings')} className="nav-link">
               Settings
             </li>
+            <li onClick={() => navigateTo('GoalSetting')} className="nav-link">
+              Goal Setting
+            </li>
           </ul>
         </nav>
       </aside>
