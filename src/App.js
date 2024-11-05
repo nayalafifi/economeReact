@@ -7,7 +7,7 @@ import Marketplace from './Marketplace'; // Import the Marketplace component
 import './App.css';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('login');
+  const [currentPage, setCurrentPage] = useState('dashboard');
 
   const navigateToDashboard = () => setCurrentPage('dashboard');
 
