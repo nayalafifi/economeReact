@@ -11,6 +11,8 @@ EconoMe is a financial management dashboard built using React. This application 
 Dashboard Wireframe:
 ![dashboard](public/dashboard.png)
 
+---
+
 ### Component Documentation
 
 Below is a breakdown of each component in the EconoMe project.
