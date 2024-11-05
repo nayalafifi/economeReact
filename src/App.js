@@ -1,14 +1,16 @@
-import React, { useState } from 'react';  // Import React and useState
-import Dashboard from './dashboard';      // Import Dashboard component
-import Profile from './Profile';          // Import Profile component
-import GoalSetting from './GoalSetting';  // Import GoalSetting component
-import './App.css';                       // Import CSS
+import React, { useState } from 'react';
+import Dashboard from './dashboard';
+import Profile from './Profile';
+import GoalSetting from './GoalSetting';
+import Login from './login';
+import './App.css';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('dashboard');
+  const [currentPage, setCurrentPage] = useState('login');
 
   return (
     <div className="App">
+      {currentPage === 'login' && <Login />}
       {currentPage === 'dashboard' && <Dashboard navigateTo={setCurrentPage} />}
       {currentPage === 'profile' && <Profile />}
       {currentPage === 'GoalSetting' && <GoalSetting />}
