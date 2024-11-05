@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import './GoalSetting.css';
+
 
 function GoalSetting() {
     const [goals, setGoals] = useState([]);
