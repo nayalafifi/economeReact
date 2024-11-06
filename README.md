@@ -12,7 +12,10 @@ Dashboard Wireframe:
 ![dashboard](public/dashboard.png)
 Marketplace Wireframe:
 ![marketplace](public/marketplace.png)
-
+Profile Wireframe:
+![profile](public/Myprofile.png)
+Landing Page Wireframe:
+![login](public/Landingpage:login.png)
 ---
 
 ### Component Documentation
