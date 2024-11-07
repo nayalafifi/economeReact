@@ -1,31 +1,32 @@
+// App.js
 import React, { useState } from 'react';
+import Sidebar from './sidebar';
 import Dashboard from './dashboard';
 import Profile from './Profile';
 import GoalSetting from './GoalSetting';
 import Login from './login';
-import Marketplace from './Marketplace'; // Import the Marketplace component
+import Marketplace from './Marketplace';
 import './App.css';
+import './dashboard.css';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('dashboard');
+  const [currentPage, setCurrentPage] = useState('login');
 
-  const navigateToDashboard = () => setCurrentPage('dashboard');
+  const navigateTo = (page) => setCurrentPage(page);
 
   return (
     <div className="App">
-      {currentPage === 'login' && <Login onLoginSuccess={navigateToDashboard} />}
-      {currentPage === 'dashboard' && <Dashboard navigateTo={setCurrentPage} />}
-      {currentPage === 'profile' && <Profile />}
-      {currentPage === 'GoalSetting' && <GoalSetting />}
-      {currentPage === 'marketplace' && <Marketplace />} {/* Add Marketplace */}
-      
-      {/* Add a navigation button to go to the Marketplace */}
-      {currentPage !== 'login' && (
-        <div className="navigation">
-          <button onClick={() => setCurrentPage('dashboard')}>Dashboard</button>
-          <button onClick={() => setCurrentPage('profile')}>Profile</button>
-          <button onClick={() => setCurrentPage('GoalSetting')}>Goal Setting</button>
-          <button onClick={() => setCurrentPage('marketplace')}>Marketplace</button>
+      {currentPage === 'login' ? (
+        <Login onLoginSuccess={() => setCurrentPage('dashboard')} />
+      ) : (
+        <div className="dashboard">
+          <Sidebar navigateTo={navigateTo} currentPage={currentPage} />
+          <main className="main-content">
+            {currentPage === 'dashboard' && <Dashboard />}
+            {currentPage === 'profile' && <Profile />}
+            {currentPage === 'goalSetting' && <GoalSetting />}
+            {currentPage === 'marketplace' && <Marketplace />}
+          </main>
         </div>
       )}
     </div>

@@ -1,70 +1,147 @@
-.goal-setting-layout {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Center form vertically in the view */
-    align-items: center; /* Center form horizontally */
-    min-height: 100vh; /* Full viewport height */
-    padding: 1rem; /* Padding around the form */
-    background-color: #f4f4f9; /* Same as main-content area */
-    width: 100%; /* Full width */
-  }
-  
+.goal-setting {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.goal-setting h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.goal-setting h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  margin-bottom: 1.5rem;
+}
+
+.goal-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-group input {
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  transition: border-color 0.15s ease-in-out;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+  grid-column: span 2;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;
+}
+
+.goal-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.goal-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.goal-item h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.goal-item p {
+  margin: 0.25rem 0;
+  color: #4b5563;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 0.75rem;
+}
+
+.progress {
+  height: 100%;
+  background-color: #3b82f6;
+  transition: width 0.3s ease;
+}
+
+.completed {
+  background-color: #dcfce7;
+}
+
+.completed h4 {
+  color: #065f46;
+}
+
+.completed p {
+  color: #047857;
+}
+
+@media (max-width: 640px) {
   .goal-form {
-    width: 100%; /* Form takes full width of its container */
-    max-width: 600px; /* Maximum width to keep it readable */
-    background-color: #ffffff;
-    padding: 2rem; /* Increased padding for better spacing */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    grid-template-columns: 1fr;
   }
-  
-  .goal-input {
-    width: 100%;
-    padding: 1rem; /* Larger padding for larger touch area */
-    margin-bottom: 1rem;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 1.2rem; /* Larger font size for readability */
+
+  .btn-primary {
+    grid-column: span 1;
   }
-  
-  .goal-input:focus {
-    border-color: #2a9d8f;
-    outline: none;
+
+  .goal-list {
+    grid-template-columns: 1fr;
   }
-  
-  .goal-button {
-    width: 100%;
-    padding: 1rem; /* Larger padding for a bigger button */
-    background-color: #2a9d8f;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1.2rem; /* Larger font size for visibility */
-  }
-  
-  .goal-button:hover {
-    background-color: #264653;
-  }
-  
-  .goal-item {
-    color: white; /* White text for better contrast */
-    background-color: #2a9d8f; /* Consistent shade of blue as used in the button */
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem; /* Space between items */
-    text-align: center;
-    font-size: 1.2rem; /* Larger text */
-  }
-  
-  @media (max-width: 768px) {
-    .goal-setting-layout {
-      padding: 0.5rem;
-    }
-  
-    .goal-form {
-      padding: 1rem;
-    }
-  }
-  
+}

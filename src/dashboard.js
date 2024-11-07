@@ -4,19 +4,6 @@ import './dashboard.css';
 const Dashboard = ({ navigateTo }) => {
   return (
     <div className="dashboard">
-      {/* Sidebar */}
-      <aside className="sidebar">
-        <h1 className="logo">EconoMe</h1>
-        <nav className="nav">
-          <ul>
-            <li><a href="#" className="nav-link active">Dashboard</a></li>
-            <li><a href="#" className="nav-link">Your Profile</a></li>
-            <li><a href="#" className="nav-link">MarketPlace</a></li>
-            <li><a href="#" className="nav-link">Settings</a></li>
-          </ul>
-        </nav>
-      </aside>
-
       {/* Main Content */}
       <main className="main-content">
         <header className="header">
