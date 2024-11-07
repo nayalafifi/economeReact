@@ -50,7 +50,7 @@ function GoalSetting() {
                     <div className="form-group">
                         <label htmlFor="name">Goal Name</label>
                         <input
-                            type="text"
+                            
                             id="name"
                             name="name"
                             value={newGoal.name}
