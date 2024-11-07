@@ -16,6 +16,9 @@ Profile Wireframe:
 ![profile](public/Myprofile.png)
 Landing Page Wireframe:
 ![login](public/Landingpage:login.png)
+Goal Setting Wireframe:
+![GoalSetting](public/GoalSetting.png)
+
 ---
 
 ### Component Documentation
