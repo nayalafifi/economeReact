@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './login.css';
 
 const logo = process.env.PUBLIC_URL + '/EconoME.png';
 
 const Login = ({ onLoginSuccess }) => {
-  const navigate = useNavigate();
+  const [isRegistering, setIsRegistering] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [isRegistering, setIsRegistering] = useState(false);
 
   // Handle Login Submit
   const handleLoginSubmit = async (event) => {
@@ -35,44 +33,23 @@ const Login = ({ onLoginSuccess }) => {
     }
   };
 
-  // Register Submit Handler
+  // Handle Register Submit
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
-
-    const userData = {
-      user_id: Date.now(),
-      name,
-      email,
-      password,
-      dob: "2000-01-01", // Default DOB
-      income: 0,         // Default income
-    };
-
-    console.log("Sending registration data:", userData);
-
     try {
       const response = await fetch("http://127.0.0.1:8000/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(userData),
+        body: JSON.stringify({ user_id: Date.now(), name, email, password, dob: "2000-01-01", income: 0 }),
       });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error("Registration error:", errorData);
-        throw new Error("Registration failed");
-      }
+      if (!response.ok) throw new Error("Registration failed");
 
       const data = await response.json();
       console.log("Registration successful:", data);
-
-      // Save user ID in localStorage after registration
-      localStorage.setItem("user_id", userData.user_id);
-
-      // Redirect to dashboard page on successful registration
-      navigate('/dashboard#');
+      
+      setIsRegistering(false); // Switch back to login after registering
     } catch (error) {
       console.error("Error:", error);
     }
