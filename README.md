@@ -1,108 +1,203 @@
 
 # EconoMe - React Financial Dashboard
 
-### Project Description
+## Project Overview
 
-EconoMe is a financial management dashboard built using React. This application provides users with a clean and organized interface to view their financial summary, manage expenses, and set personal goals. The sidebar navigation allows users to switch between the Dashboard, Profile, Marketplace, and Settings sections, each presenting different functionalities and insights.
+EconoMe is a financial management dashboard that enables users to manage their financial data, set goals, and track budgets. Built with a React frontend and FastAPI backend, EconoMe is a full-stack application that allows users to create, retrieve, update, and delete (CRUD) their data through an intuitive interface.
 
----
+## Table of Contents
 
-### Wireframes
-Dashboard Wireframe:
-![dashboard](public/dashboard.png)
-Marketplace Wireframe:
-![marketplace](public/marketplace.png)
-Profile Wireframe:
-![profile](public/Myprofile.png)
-Landing Page Wireframe:
-![login](public/Landingpage:login.png)
-Goal Setting Wireframe:
-![GoalSetting](public/GoalSetting.png)
+- [Features](#features)
+- [API Endpoints](#api-endpoints)
+- [Setup Instructions](#setup-instructions)
+- [Using the API Requests](#using-the-api-requests)
+- [Evaluation Criteria](#evaluation-criteria)
 
----
+## Features
 
-### Component Documentation
+- **User Registration and Login**: Users can register and log in to access their financial dashboard.
+- **Profile Management**: View and update personal details such as name, email, date of birth, and income.
+- **Goal Setting and Budget Tracking**: Users can define financial goals and monitor budget usage.
+- **Intuitive Interface**: Clear navigation and feedback for all actions within the dashboard.
+- **Error Handling and Feedback**: User-friendly notifications for each API interaction, ensuring users are informed of the status of their actions.
 
-Below is a breakdown of each component in the EconoMe project.
+## API Endpoints
 
-1. **App.js**:  
-   - **Functionality**: This is the main component that controls navigation across the app’s primary pages (Dashboard, Profile, GoalSetting).
-   - **State**: `useState` is used to manage the `currentPage`, determining which page is displayed based on the sidebar selections.
-   
-2. **Dashboard.js**:
-   - **Functionality**: This component displays the main dashboard view, including financial summaries, goal tracking, weekly expenses, and a sidebar for navigation.
-   - **Props**: `navigateTo` is passed down from `App.js` to allow users to switch between different pages.
-   
-3. **Profile.js**:
-   - **Functionality**: Shows user profile information, including name, email, membership details, and a summary of financial stats.
-   
-4. **GoalSetting.js**:
-   - **Functionality**: Allows users to set and track financial goals.
-   
-5. **Sidebar (part of Dashboard.js)**:
-   - **Functionality**: Provides navigation to different parts of the app. Users can click options to navigate to the Dashboard, Profile, Marketplace, or Settings.
+### User Management Endpoints
 
----
+- **Register a User**
+  - **URL**: `POST /register`
+  - **Request**: Sends a user’s details for registration.
+  - **Request Body**:
+    ```json
+    {
+      "user_id": 1,
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "dob": "1990-01-01",
+      "income": 50000
+    }
+    ```
+  - **Example Screenshot**:
+    ![POST Request - Register User](POST1.png)
 
-### Setup Instructions
 
-Follow these instructions to set up the EconoMe project locally.
+### CRUD Endpoints for User Data
 
-1. **Clone the Repository**:
+- **Get All Users**
+  - **URL**: `GET /users`
+  - **Request**: Fetches the user.
+  - **Response**: Array of user objects.
+  - **Example Screenshot**:
+    ![GET Request - User](GET1.png)
+
+- **Get User by ID**
+  - **URL**: `GET /users/{user_id}`
+  - **Request**: Fetches a specific user’s data using their user ID.
+  - **Response**: User object if found.
+
+- **Update User by ID**
+  - **URL**: `PUT /users/{user_id}`
+  - **Request Body**:
+    ```json
+    {
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "dob": "1990-01-01",
+      "income": 60000
+    }
+    ```
+  - **Description**: Updates details of a specific user.
+
+- **Delete User by ID**
+  - **URL**: `DELETE /users/{user_id}`
+  - **Description**: Deletes a user from the system.
+
+## Setup Instructions
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) for the frontend
+- [Python 3.8+](https://www.python.org/) and [FastAPI](https://fastapi.tiangolo.com/) for the backend
+- MySQL database for user data storage
+
+### Frontend Setup
+
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/nayalafifi/economeReact.git
-   cd economeReact
    ```
-
-2. **Install Dependencies**:
+2. **Navigate to the project directory and install dependencies:**
    ```bash
+   cd economeReact
    npm install
    ```
-
-3. **Start the Development Server**:
+3. **Start the frontend server:**
    ```bash
    npm start
    ```
-   This will start the React development server. Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
-4. **Build the App for Production**:
-   To create a production build, run:
+### Backend Setup
+
+1. **Clone the repository:**
    ```bash
-   npm run build
+   git clone https://github.com/izah2587/EconoMe.git
    ```
-   This will generate a `build` folder with optimized files for deployment.
+2. **Navigate to the project directory:**
 
----
+    ```bash
+    cd path/to/your-repository
+    ```
 
-### Development Process
+3. **Set Up a Virtual Environment (Optional but Recommended)**
 
-#### Design Decisions
+    ```bash
+    python -m venv .venv
+    ```
 
-1. **Navigation with State Management**:
-   - Instead of using a routing library like React Router, we opted for a simple `useState` approach to manage page navigation. This was chosen to keep the project lightweight and straightforward for educational purposes.
-   
-2. **Component Structure**:
-   - Each major section of the app (Dashboard, Profile, GoalSetting) is separated into its own component. This modular approach improves readability and maintainability, allowing each section to be developed and tested independently.
+    **On Windows:**
 
-3. **Styling and Layout**:
-   - CSS files are used for styling each component (`App.css`, `dashboard.css`, etc.). This keeps component-specific styles separate, enhancing maintainability and making it easy to find and modify specific styles.
+    ```bash
+    .venv\Scripts\activate
+    ```
 
-#### Technical Choices
+    **On macOS and Linux:**
 
-1. **React**:
-   - React was chosen for its component-based architecture, which makes it easy to build and manage each section of the dashboard independently.
-   
-2. **CSS Modules**:
-   - Separate CSS files for each component help in managing styles in a modular way, making sure styles don’t clash across components.
+    ```bash
+    source .venv/bin/activate
+    ```
 
-3. **State Management with `useState`**:
-   - The simple state management solution with `useState` is sufficient for this project, given the minimal navigation requirements. If the project were to expand, using a library like Redux or React Context could be considered.
+4. **Install Required Packages**
 
-#### AI Usage
+    Once the virtual environment is activated, install the necessary dependencies from the `requirements.txt` file:
 
-1. **Component Structure and State Management**:
-   - AI assistance was used to outline the structure of the components and to simplify state management for navigation between the different sections of the app. 
-   
-2. **Styling and Design Suggestions**:
-   - AI was also used to provide suggestions on the layout and organization of CSS classes to ensure the design is consistent and visually appealing.
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+5. **Set Up Your `.env` File**
+
+    To securely store your MySQL database credentials, you need to set up a `.env` file in the root of the project directory:
+
+    Create a new `.env` file in the project root:
+
+    ```bash
+    touch .env
+    ```
+
+    Open the `.env` file in a text editor and add your MySQL connection details in the following format:
+
+    ```bash
+    db_host=your_mysql_host
+    db_user=your_mysql_username
+    db_pass=your_mysql_password
+    db_name=your_database_name
+    ```
+
+    Replace the placeholders with your actual MySQL connection details.
+
+
+6. **Add `.env` to `.gitignore`**
+
+    Ensure the `.env` file is excluded from version control by adding it to your `.gitignore` file. If you don't have a `.gitignore` file, create one and add the following line:
+
+    ```bash
+    .env
+    ```
+
+    This will prevent the `.env` file from being accidentally pushed to the repository.
+
+
+4. **Start the FastAPI server:**
+
+   ```bash
+   uvicorn main:app --reload
+   ```
+
+### Running the Application
+
+- Ensure both the frontend (`localhost:3000`) and backend (`localhost:8000`) servers are running.
+- Access the application on your browser at `http://localhost:3000`.
+
+## Using the API Requests
+
+The frontend application sends HTTP requests to the backend API using the following methods:
+
+1. **Register and Login (POST Requests)**:
+   - When users fill out the registration form and submit it, a `POST` request is sent to the `/register` endpoint with the user's details.
+   - The login form sends a `POST` request to `/login` for authentication.
+   - **Screenshots**:
+     - Registration Request:
+       ![POST Request for Registration](POST1.png)
+     - Login Request:
+       ![POST Request for Login](POST2.png)
+
+2. **Fetching Users (GET Requests)**:
+   - The application fetches the list of all users using a `GET` request to `/users`.
+   - When viewing a specific user profile, the app sends a `GET` request to `/users/{user_id}`.
+   - **Screenshot**:
+     ![GET Request for Users](GET1.png)
+
+3. **Error Handling**:
+   - The application includes error handling for scenarios like failed login or missing user data. Users are notified in the UI if an error occurs during an API request.
 
