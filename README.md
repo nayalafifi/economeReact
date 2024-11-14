@@ -39,7 +39,7 @@ EconoMe is a financial management dashboard that enables users to manage their f
     }
     ```
   - **Example Screenshot**:
-    ![POST Request - Register User](POST1.png)
+    ![POST Request - Register User](public/POST1.png)
 
 
 ### CRUD Endpoints for User Data
@@ -49,7 +49,7 @@ EconoMe is a financial management dashboard that enables users to manage their f
   - **Request**: Fetches the user.
   - **Response**: Array of user objects.
   - **Example Screenshot**:
-    ![GET Request - User](GET1.png)
+    ![GET Request - User](public/GET1.png)
 
 - **Get User by ID**
   - **URL**: `GET /users/{user_id}`
@@ -182,21 +182,23 @@ EconoMe is a financial management dashboard that enables users to manage their f
 ## Using the API Requests
 
 The frontend application sends HTTP requests to the backend API using the following methods:
-
+**Documentation of API Endpoints:**
+   ![POST Request for Login](public/APIREQUESTS.png)
+   
 1. **Register and Login (POST Requests)**:
    - When users fill out the registration form and submit it, a `POST` request is sent to the `/register` endpoint with the user's details.
    - The login form sends a `POST` request to `/login` for authentication.
    - **Screenshots**:
      - Registration Request:
-       ![POST Request for Registration](POST1.png)
+       ![POST Request for Registration](public/POST1.png)
      - Login Request:
-       ![POST Request for Login](POST2.png)
+       ![POST Request for Login](public/POST2.png)
 
 2. **Fetching Users (GET Requests)**:
    - The application fetches the list of all users using a `GET` request to `/users`.
    - When viewing a specific user profile, the app sends a `GET` request to `/users/{user_id}`.
    - **Screenshot**:
-     ![GET Request for Users](GET1.png)
+     ![GET Request for Users](public/GET1.png)
 
 3. **Error Handling**:
    - The application includes error handling for scenarios like failed login or missing user data. Users are notified in the UI if an error occurs during an API request.
