@@ -35,18 +35,6 @@ const Dashboard = () => {
           <button className="btn btn-primary">Add widget</button>
         </header>
 
-        {/* User List */}
-        <section>
-          <h2>User List</h2>
-          <ul>
-            {users.map((user) => (
-              <li key={user.user_id}>
-                {user.name} - {user.email}
-              </li>
-            ))}
-          </ul>
-        </section>
-
         {/* Progress Cards */}
         <div className="card-grid">
           {['Budget', 'Goal 1', 'Goal 2'].map((title, index) => (
