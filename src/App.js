@@ -1,4 +1,3 @@
-// App.js
 import React, { useState } from 'react';
 import Sidebar from './sidebar';
 import Dashboard from './dashboard';
