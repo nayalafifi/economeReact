@@ -1,15 +1,51 @@
-import React from 'react';
+// Dashboard.js
+import React, { useEffect, useState } from 'react';
+import { fetchUsers } from './api';
 import './dashboard.css';
 
-const Dashboard = ({ navigateTo }) => {
+const Dashboard = () => {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadUsers = async () => {
+      try {
+        const userData = await fetchUsers();
+        setUsers(userData);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        setError("Failed to load users");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadUsers();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <div className="dashboard">
-      {/* Main Content */}
       <main className="main-content">
         <header className="header">
           <h2>Dashboard</h2>
           <button className="btn btn-primary">Add widget</button>
         </header>
+
+        {/* User List */}
+        <section>
+          <h2>User List</h2>
+          <ul>
+            {users.map((user) => (
+              <li key={user.user_id}>
+                {user.name} - {user.email}
+              </li>
+            ))}
+          </ul>
+        </section>
 
         {/* Progress Cards */}
         <div className="card-grid">
