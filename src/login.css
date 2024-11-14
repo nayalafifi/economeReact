@@ -1,94 +1,95 @@
 /* Centering container */
 .login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #ffffff;
-  }
-  
-  /* Title styling */
-  .app-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 1.5rem;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f3f4f6; 
+}
 
-  .logo {
-    width: 300px;
-    margin-bottom: 1rem;
-  }
-  
-  /* Forms container */
-  .login-register-forms {
-    display: flex;
-    gap: 2rem;
-    padding: 2rem;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Individual form styling */
-  .login-form, .register-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1.5rem;
-    width: 300px;
-  }
-  
-  .login-form h2, .register-form h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: #333;
-  }
-  
-  /* Input styling */
-  input[type="email"], input[type="password"], input[type="text"] {
-    width: 100%;
-    padding: 0.75rem;
-    margin: 0.5rem 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-  }
-  
-  input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focus {
-    border-color: #ff7f50;
-    outline: none;
-  }
-  
-  /* Button styling */
-  .login-button, .register-button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #ff7f50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-  }
-  
-  .login-button:hover, .register-button:hover {
-    background-color: #ff5722;
-    transform: translateY(-2px);
-  }
-  
-  .login-button:active, .register-button:active {
-    background-color: #e64a19;
-    transform: translateY(0);
-  }
-  
-  /* Footer styling */
-  .footer {
-    margin-top: 2rem;
-    font-size: 0.9rem;
-    color: #666;
-  }
-  
+/* Title styling */
+.app-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1f2937; 
+  margin-bottom: 1.5rem;
+}
+
+.logo {
+  width: 300px; 
+  margin-bottom: 1rem;
+  color: #3b82f6; 
+}
+
+/* Forms container */
+.login-register-forms {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* Softened shadow for consistency */
+}
+
+/* Individual form styling */
+.login-form, .register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  width: 300px;
+}
+
+.login-form h2, .register-form h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+/* Input styling */
+input[type="email"], input[type="password"], input[type="text"] {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid #e5e7eb; 
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focus {
+  border-color: #3b82f6; /* Focus color to match buttons and links */
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); /* Consistent focus shadow */
+}
+
+/* Button styling */
+.login-button, .register-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #3b82f6; /* Button background updated */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.login-button:hover, .register-button:hover {
+  background-color: #2563eb; /* Darker shade on hover */
+  transform: translateY(-2px);
+}
+
+.login-button:active, .register-button:active {
+  background-color: #1d4ed8;
+  transform: translateY(0);
+}
+
+/* Footer styling */
+.footer {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #6b7280; 
+}
