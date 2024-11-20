@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './login.css';
 
-const logo = process.env.PUBLIC_URL + '/EconoME.png';
+const logo = process.env.PUBLIC_URL + 'econoMe_logo.png';
 
 const Login = ({ onLoginSuccess }) => {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -58,13 +58,23 @@ const Login = ({ onLoginSuccess }) => {
   return (
     <div className="login-container">
       <img src={logo} alt="EconoME Logo" className="logo" />
+      <div className="toggle-buttons">
+        <button 
+          onClick={() => setIsRegistering(false)} 
+          className={`toggle-button ${!isRegistering ? 'active' : ''}`}
+        >
+          Login
+        </button>
+        <button 
+          onClick={() => setIsRegistering(true)} 
+          className={`toggle-button ${isRegistering ? 'active' : ''}`}
+        >
+          Register
+        </button>
+      </div>
       <div className="login-register-forms">
-        <button onClick={() => setIsRegistering(false)} className="toggle-button">Login</button>
-        <button onClick={() => setIsRegistering(true)} className="toggle-button">Register</button>
-
         {isRegistering ? (
           <div className="register-form">
-            <h2>Register</h2>
             <form onSubmit={handleRegisterSubmit}>
               <input type="text" placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} required />
               <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
@@ -74,7 +84,6 @@ const Login = ({ onLoginSuccess }) => {
           </div>
         ) : (
           <div className="login-form">
-            <h2>Login</h2>
             <form onSubmit={handleLoginSubmit}>
               <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
               <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />

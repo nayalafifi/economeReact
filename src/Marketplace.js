@@ -1,29 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Marketplace.css';
 
 const Marketplace = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
 
-  // List of items
-  const items = [
-    { id: 1, name: 'Bell Peppers', price1: '$0.75 at Trader Joe\'s', price2: '$0.50 at Target', image: '/images/bell-peppers.jpg' },
-    { id: 2, name: 'Green Peppers', price1: '$0.75 at Trader Joe\'s', price2: '$0.50 at Target', image: '/images/green-peppers.jpg' },
-    { id: 3, name: 'Tomatoes', price1: '$0.55 at Trader Joe\'s', price2: '$0.70 at Target', image: '/images/tomatoes.jpg' },
-    { id: 4, name: 'Apples', price1: '$0.75 at Trader Joe\'s', price2: '$0.50 at Target', image: '/images/apples.jpg' }
-  ];
+  // Fetch products from the backend when the component mounts
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/products/');
+        setItems(response.data);
+        setFilteredItems(response.data); // Initialize filteredItems with all items
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        alert('Failed to fetch products. Please try again.');
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   // Function to handle the search button click
   const handleSearch = () => {
     if (searchTerm === '') {
-      // Reset filteredItems if search term is empty (display all items)
-      setFilteredItems([]);
+      setFilteredItems(items);
     } else {
-      // Filter the items based on the search term
       const results = items.filter(item =>
-        item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        item.product_name.toLowerCase().includes(searchTerm.toLowerCase())
       );
-      // Update the filtered items to be displayed
       setFilteredItems(results);
     }
   };
@@ -32,41 +39,37 @@ const Marketplace = () => {
   const itemsToDisplay = searchTerm && filteredItems.length > 0 ? filteredItems : items;
 
   return (
-    <div className="landing-page">
+    <div className="marketplace-container">
       <h1>EconoMe Marketplace</h1>
 
-      {/* Add the search bar */}
       <div className="search-bar-container">
         <input
           type="text"
           className="search-bar"
           placeholder="Enter item(s)"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)} // Update searchTerm on user input
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
-        {/* Search button */}
         <button className="search-button" onClick={handleSearch}>
           Search
         </button>
       </div>
 
-      {/* Display the filtered items or all items by default */}
       <div className="item-grid">
         {itemsToDisplay.length > 0 ? (
-          itemsToDisplay.map(item => (
-            <div key={item.id} className="item">
-              <img src={item.image} alt={item.name} />
-              <h2>{item.name}</h2>
-              <p>{item.price1}</p>
-              <p>{item.price2}</p>
+          itemsToDisplay.map((item, index) => (
+            <div key={index} className="item">
+              <h2>{item.product_name}</h2>
+              <p><strong>Store:</strong> {item.store_name}</p>
+              <p><strong>Price:</strong> {item.price}</p>
+              <p><strong>Last Checked:</strong> {item.last_checked_at}</p>
+              <a href={item.url} target="_blank" rel="noopener noreferrer">View Product</a>
             </div>
           ))
         ) : (
           <p>No items found. Try searching for something else!</p>
         )}
       </div>
-
-      <button className="see-more">See More!</button>
     </div>
   );
 };
