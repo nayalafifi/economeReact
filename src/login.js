@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import './login.css';
 
-const logo = process.env.PUBLIC_URL + 'econoMe_logo.png';
-
 const Login = ({ onLoginSuccess }) => {
   const [isRegistering, setIsRegistering] = useState(false);
   const [email, setEmail] = useState('');
@@ -57,7 +55,6 @@ const Login = ({ onLoginSuccess }) => {
 
   return (
     <div className="login-container">
-      <img src={logo} alt="EconoME Logo" className="logo" />
       <div className="login-register-forms">
         {isRegistering ? (
           <div className="register-form">

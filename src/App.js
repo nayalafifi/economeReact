@@ -1,33 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import Sidebar from './sidebar';
 import Dashboard from './dashboard';
 import Profile from './Profile';
 import GoalSetting from './GoalSetting';
 import Login from './login';
 import Marketplace from './Marketplace';
+import Landing from './landing';
 import './App.css';
 import './dashboard.css';
+import './landing.css';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('login');
-
-  const navigateTo = (page) => setCurrentPage(page);
-
   return (
     <div className="App">
-      {currentPage === 'login' ? (
-        <Login onLoginSuccess={() => setCurrentPage('dashboard')} />
-      ) : (
-        <div className="dashboard">
-          <Sidebar navigateTo={navigateTo} currentPage={currentPage} />
-          <main className="main-content">
-            {currentPage === 'dashboard' && <Dashboard />}
-            {currentPage === 'profile' && <Profile />}
-            {currentPage === 'goalSetting' && <GoalSetting />}
-            {currentPage === 'marketplace' && <Marketplace />}
-          </main>
-        </div>
-      )}
+      <Routes>
+        {/* Define route for the landing page */}
+        <Route path="/" element={<Landing />} />
+
+        {/* Define route for the login page */}
+        <Route path="/login" element={<Login onLoginSuccess={() => <Navigate to="/dashboard#" />} />} />
+
+        {/* Define a layout route for the dashboard with nested routes */}
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="goalSetting" element={<GoalSetting />} />
+          <Route path="marketplace" element={<Marketplace />} />
+        </Route>
+      </Routes>
+    </div>
+  );
+}
+
+function DashboardLayout() {
+  return (
+    <div className="dashboard">
+      <Sidebar />
+      <main className="main-content">
+        {/* The <Outlet /> component will render the nested routes defined in App.js */}
+        <Outlet />
+      </main>
     </div>
   );
 }

@@ -1,57 +1,52 @@
-// Sidebar.js
 import React from 'react';
+import { NavLink } from 'react-router-dom'; // Import NavLink from react-router-dom
 import './sidebar.css'; // Import sidebar styles
 
-const Sidebar = ({ navigateTo, currentPage }) => {
+const Sidebar = () => {
   return (
     <aside className="sidebar">
       <h1 className="logo">EconoMe</h1>
       <nav className="nav">
         <ul>
           <li>
-            <a
-              href="#"
-              className={`nav-link ${currentPage === 'dashboard' ? 'active' : ''}`}
-              onClick={() => navigateTo('dashboard')}
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
             >
               Dashboard
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a
-              href="#"
-              className={`nav-link ${currentPage === 'profile' ? 'active' : ''}`}
-              onClick={() => navigateTo('profile')}
+            <NavLink
+              to="/dashboard/profile"
+              className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
             >
               Your Profile
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a
-              href="#"
-              className={`nav-link ${currentPage === 'marketplace' ? 'active' : ''}`}
-              onClick={() => navigateTo('marketplace')}
+            <NavLink
+              to="/dashboard/marketplace"
+              className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
             >
               MarketPlace
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a
-              href="#"
-              className={`nav-link ${currentPage === 'goalSetting' ? 'active' : ''}`}
-              onClick={() => navigateTo('goalSetting')}
+            <NavLink
+              to="/dashboard/goalSetting"
+              className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
             >
               Goal Setting
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a
-              href="#"
-              className={`nav-link ${currentPage === 'settings' ? 'active' : ''}`}
-              onClick={() => navigateTo('settings')}
+            <NavLink
+              to="/dashboard/settings"
+              className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
             >
               Settings
-            </a>
+            </NavLink>
           </li>
         </ul>
       </nav>
