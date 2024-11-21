@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './login.css';
 
-const Login = ({ onLoginSuccess }) => {
+const logo = process.env.PUBLIC_URL + 'econoMe_logo.png';
+
+const Login = () => {
+  const navigate = useNavigate(); // Hook for navigation
   const [isRegistering, setIsRegistering] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,7 +29,7 @@ const Login = ({ onLoginSuccess }) => {
       
       // Store user ID
       localStorage.setItem("user_id", data.user.user_id);
-      onLoginSuccess(); // Navigate to dashboard
+      navigate('/dashboard'); // Navigate to dashboard
     } catch (error) {
       console.error("Error:", error);
     }
@@ -55,6 +59,7 @@ const Login = ({ onLoginSuccess }) => {
 
   return (
     <div className="login-container">
+      <img src={logo} alt="EconoME Logo" className="logo" />
       <div className="login-register-forms">
         {isRegistering ? (
           <div className="register-form">

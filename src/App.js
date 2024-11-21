@@ -1,15 +1,12 @@
 import React from 'react';
-import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
-import Sidebar from './sidebar';
+import { Routes, Route, Navigate, Outlet, useNavigate } from 'react-router-dom';
 import Dashboard from './dashboard';
 import Profile from './Profile';
 import GoalSetting from './GoalSetting';
 import Login from './login';
 import Marketplace from './Marketplace';
 import Landing from './landing';
-import './App.css';
-import './dashboard.css';
-import './landing.css';
+import Sidebar from './sidebar'; 
 
 function App() {
   return (
@@ -18,8 +15,8 @@ function App() {
         {/* Define route for the landing page */}
         <Route path="/" element={<Landing />} />
 
-        {/* Define route for the login page */}
-        <Route path="/login" element={<Login onLoginSuccess={() => <Navigate to="/dashboard#" />} />} />
+        {/* Define route for the login page with an enhanced component */}
+        <Route path="/login" element={<LoginWrapper />} />
 
         {/* Define a layout route for the dashboard with nested routes */}
         <Route path="/dashboard" element={<DashboardLayout />}>
@@ -33,13 +30,20 @@ function App() {
   );
 }
 
+function LoginWrapper() {
+  const navigate = useNavigate();
+  const handleLoginSuccess = () => {
+    navigate('/dashboard'); 
+  };
+  return <Login onLoginSuccess={handleLoginSuccess} />;
+}
+
 function DashboardLayout() {
   return (
     <div className="dashboard">
-      <Sidebar />
+      <Sidebar />  
       <main className="main-content">
-        {/* The <Outlet /> component will render the nested routes defined in App.js */}
-        <Outlet />
+        <Outlet /> 
       </main>
     </div>
   );
