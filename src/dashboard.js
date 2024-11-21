@@ -1,7 +1,9 @@
-// Dashboard.js
 import React, { useEffect, useState } from 'react';
 import { fetchUsers } from './api';
 import './dashboard.css';
+
+
+const logo = process.env.PUBLIC_URL + 'econoMe_logo.png';
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
@@ -29,12 +31,14 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <main className="main-content">
-        <header className="header">
-          <h2>Dashboard</h2>
-          <button className="btn btn-primary">Add widget</button>
-        </header>
+      <header className="dashboard-header">
+        <h2>Dashboard</h2>
+        <button className="btn btn-primary">Add widget</button>
+        {/* Logo added here */}
+        <img src={logo} alt="Logo" className="logo" />
+      </header>
 
+      <main className="main-content">
         {/* Progress Cards */}
         <div className="card-grid">
           {['Budget', 'Goal 1', 'Goal 2'].map((title, index) => (

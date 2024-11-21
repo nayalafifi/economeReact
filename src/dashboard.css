@@ -20,14 +20,6 @@ body {
   border-right: 1px solid #e5e7eb;
   padding: 2rem;
 }
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-  color: #3b82f6;
-}
-
 .nav ul {
   list-style: none;
   padding: 0;

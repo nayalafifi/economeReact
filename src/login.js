@@ -22,18 +22,30 @@ const Login = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-      if (!response.ok) throw new Error("Login failed");
-
+  
+      if (!response.ok) {
+        if (response.status === 401) {
+          // Show an error message for invalid credentials
+          alert("Invalid email or password. Please try again.");
+        } else {
+          // Generic error message for other issues
+          alert("An error occurred while logging in. Please try again later.");
+        }
+        return; // Stop execution if login fails
+      }
+  
       const data = await response.json();
       console.log("Login successful:", data);
-      
+  
       // Store user ID
       localStorage.setItem("user_id", data.user.user_id);
       navigate('/dashboard'); // Navigate to dashboard
     } catch (error) {
       console.error("Error:", error);
+      alert("An error occurred while logging in. Please try again later.");
     }
   };
+  
 
   // Handle Register Submit
   const handleRegisterSubmit = async (event) => {

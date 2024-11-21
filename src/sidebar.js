@@ -2,10 +2,14 @@ import React from 'react';
 import { NavLink } from 'react-router-dom'; // Import NavLink from react-router-dom
 import './sidebar.css'; // Import sidebar styles
 
+const logo = process.env.PUBLIC_URL + 'econoMe_logo.png'; 
+
 const Sidebar = () => {
   return (
     <aside className="sidebar">
-      <h1 className="logo">EconoMe</h1>
+      <div className="logo-container">
+        <img src={logo} alt="Logo" className="logo" />
+      </div>
       <nav className="nav">
         <ul>
           <li>
