@@ -17,7 +17,6 @@ function App() {
 
         {/* Define route for the login page with an enhanced component */}
         <Route path="/login" element={<LoginWrapper />} />
-
         {/* Define a layout route for the dashboard with nested routes */}
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<Dashboard />} />
@@ -32,12 +31,13 @@ function App() {
 
 function LoginWrapper() {
   const navigate = useNavigate();
-  const handleLoginSuccess = () => {
-    navigate('/dashboard'); 
-  };
-  return <Login onLoginSuccess={handleLoginSuccess} />;
-}
 
+  const handleLoginSuccess = () => {
+    navigate('/Dashboard');
+  };
+
+  return <Login onLoginSuccess={handleLoginSuccess} onRegisterSuccess={handleRegisterSuccess} />;
+}
 function DashboardLayout() {
   return (
     <div className="dashboard">
