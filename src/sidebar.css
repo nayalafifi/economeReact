@@ -27,7 +27,7 @@ body {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 2rem;
-    color: #3b82f6;
+    color: #1c4d30;
   }
   
   .nav ul {
@@ -47,7 +47,7 @@ body {
   
   .nav-link:hover,
   .nav-link.active {
-    background-color: #3b82f6;
+    background-color: #1c4d30;
     color: white;
   }
   

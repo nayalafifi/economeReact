@@ -8,7 +8,7 @@
   
   .profile-container h2 {
     font-size: 1.8rem;
-    color: #264653;
+    color: #1c4d30;
     margin-bottom: 1rem;
     border-bottom: 2px solid #e9ecef;
     padding-bottom: 0.5rem;
@@ -28,7 +28,7 @@
   }
   
   .profile-info h3, .finance-stats h3 {
-    color: #2a9d8f;
+    color: #1c4d30;
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
   }
@@ -55,7 +55,7 @@
   }
   
   .recent-activity h3 {
-    color: #2a9d8f;
+    color: #1c4d30;
     font-size: 1.3rem;
     margin-bottom: 1rem;
   }
