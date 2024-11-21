@@ -5,8 +5,7 @@ import './Marketplace.css';
 const Marketplace = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [items, setItems] = useState([]);
-  const [filteredItems, setFilteredItems] = useState([]);
-  const [insights, setInsights] = useState(null);  // State to hold AI insights
+  const [insights, setInsights] = useState(null); // State to hold AI insights
   const [loading, setLoading] = useState(false);
 
   // Fetch products from the backend
@@ -25,33 +24,28 @@ const Marketplace = () => {
     }
   };
 
-  // Function to generate AI insights by comparing prices
+  // Fetch all products on component mount
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  // Generate AI insights
   const handleGenerateAIInsights = async () => {
     try {
-      // Call the backend to generate AI insights
-      const response = await axios.post('http://localhost:8000/compare_prices', {
-        target_products: items,
-        trader_joes_products: items
-      });
-      // Set the insights in the state (expecting a block of HTML text)
-      setInsights(response.data);
+      const response = await axios.post('http://localhost:8000/compare_prices');
+      setInsights(response.data); // Set the insights in the state
     } catch (error) {
       console.error('Error generating AI insights:', error);
       alert('Failed to generate insights. Please try again.');
     }
   };
 
-  // Show all items if no search term is entered or show filtered items
-  const itemsToDisplay = searchTerm && filteredItems.length > 0 ? filteredItems : items;
-  // Fetch all products on component mount
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  // Handle the search button click
-  const handleSearch = () => {
-    fetchProducts(searchTerm.trim());
-  };
+  // Filter items dynamically
+  const itemsToDisplay = searchTerm
+    ? items.filter((item) =>
+        item.product_name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : items;
 
   return (
     <div className="marketplace-container">
@@ -65,27 +59,26 @@ const Marketplace = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button className="search-button" onClick={handleSearch}>
+        <button className="search-button" onClick={() => fetchProducts(searchTerm)}>
           Search
         </button>
       </div>
 
-      {/* Button to generate AI insights */}
       <div className="generate-ai-insights">
         <button onClick={handleGenerateAIInsights}>Generate AI Insights</button>
       </div>
 
-      {/* Display the block of text insights if available */}
       {insights && (
         <div className="ai-insights">
           <h2>AI Insights</h2>
-          {/* Use dangerouslySetInnerHTML to render HTML content */}
           <div dangerouslySetInnerHTML={{ __html: insights.summary }} />
         </div>
       )}
 
       <div className="item-grid">
-        {itemsToDisplay.length > 0 ? (
+        {loading ? (
+          <p>Loading...</p>
+        ) : itemsToDisplay.length > 0 ? (
           itemsToDisplay.map((item, index) => (
             <div key={index} className="item">
               <h2>{item.product_name}</h2>
@@ -99,25 +92,6 @@ const Marketplace = () => {
           <p>No items found. Try searching for something else!</p>
         )}
       </div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="item-grid">
-          {items.length > 0 ? (
-            items.map((item, index) => (
-              <div key={index} className="item">
-                <h2>{item.product_name}</h2>
-                <p><strong>Store:</strong> {item.store_name}</p>
-                <p><strong>Price:</strong> {item.price}</p>
-                <p><strong>Last Checked:</strong> {item.last_checked_at}</p>
-                <a href={item.url} target="_blank" rel="noopener noreferrer">View Product</a>
-              </div>
-            ))
-          ) : (
-            <p>No items found. Try searching for something else!</p>
-          )}
-        </div>
-      )}
     </div>
   );
 };

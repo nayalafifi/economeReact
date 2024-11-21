@@ -1,61 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './GoalSetting.css';
 
 function GoalSetting() {
     const [goals, setGoals] = useState([]);
     const [newGoal, setNewGoal] = useState({
-        goal_type: '',
-        target_amount: '',
-        current_amount: '',
-        due_date: '',
-        status: 'Active',
+        name: '',
+        targetAmount: '',
+        currentAmount: '',
+        deadline: '',
+        status: 'Active'
     });
 
-    const userId = 1; // Replace with the logged-in user's ID
-
-    // Fetch existing goals from the backend
     useEffect(() => {
-        const fetchGoals = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8000/goals/${userId}`);
-                setGoals(response.data);
-            } catch (error) {
-                console.error('Error fetching goals:', error);
-                alert('Failed to fetch goals.');
-            }
-        };
-        fetchGoals();
+        // Simulating fetching goals from an API
+        const initialGoals = [
+            { id: 1, name: 'Emergency Fund', targetAmount: 10000, currentAmount: 5000, deadline: '2024-12-31', status: 'Active' },
+            { id: 2, name: 'Vacation Savings', targetAmount: 5000, currentAmount: 2500, deadline: '2024-06-30', status: 'Active' },
+            { id: 3, name: 'New Laptop', targetAmount: 2000, currentAmount: 2000, deadline: '2023-12-31', status: 'Completed' }
+        ];
+        setGoals(initialGoals);
     }, []);
 
-    // Handle input changes
     const handleChange = (e) => {
         setNewGoal({ ...newGoal, [e.target.name]: e.target.value });
     };
 
-    // Handle form submission
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        if (!newGoal.goal_type || !newGoal.target_amount || !newGoal.current_amount || !newGoal.due_date) return;
-
+        if (!newGoal.name || !newGoal.targetAmount || !newGoal.currentAmount || !newGoal.deadline) return;
         const goalToAdd = {
             ...newGoal,
-            user_id: userId,
-            set_date: new Date().toISOString().split('T')[0],
+            id: goals.length + 1,
+            targetAmount: parseFloat(newGoal.targetAmount),
+            currentAmount: parseFloat(newGoal.currentAmount)
         };
-
-        try {
-            const response = await axios.post('http://localhost:8000/goals/', goalToAdd);
-            setGoals([...goals, { ...goalToAdd, goal_id: response.data.goal_id }]);
-            setNewGoal({ goal_type: '', target_amount: '', current_amount: '', due_date: '', status: 'Active' });
-        } catch (error) {
-            console.error('Error adding goal:', error);
-            alert('Failed to add goal.');
-        }
+        setGoals([...goals, goalToAdd]);
+        setNewGoal({ name: '', targetAmount: '', currentAmount: '', deadline: '', status: 'Active' });
     };
 
-    const activeGoals = goals.filter((goal) => goal.status === 'Active');
-    const completedGoals = goals.filter((goal) => goal.status === 'Completed');
+    const activeGoals = goals.filter(goal => goal.status === 'Active');
+    const completedGoals = goals.filter(goal => goal.status === 'Completed');
 
     return (
         <div className="goal-setting">
@@ -64,44 +48,45 @@ function GoalSetting() {
                 <h3>Add New Goal</h3>
                 <form onSubmit={handleSubmit} className="goal-form">
                     <div className="form-group">
-                        <label htmlFor="goal_type">Goal Name</label>
+                        <label htmlFor="name">Goal Name</label>
                         <input
-                            id="goal_type"
-                            name="goal_type"
-                            value={newGoal.goal_type}
+                            
+                            id="name"
+                            name="name"
+                            value={newGoal.name}
                             onChange={handleChange}
                             required
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="target_amount">Target Amount</label>
-                        <input
-                            type="number"
-                            id="target_amount"
-                            name="target_amount"
-                            value={newGoal.target_amount}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="current_amount">Current Amount</label>
+                        <label htmlFor="targetAmount">Target Amount</label>
                         <input
                             type="number"
-                            id="current_amount"
-                            name="current_amount"
-                            value={newGoal.current_amount}
+                            id="targetAmount"
+                            name="targetAmount"
+                            value={newGoal.targetAmount}
                             onChange={handleChange}
                             required
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="due_date">Deadline</label>
+                        <label htmlFor="currentAmount">Current Amount</label>
+                        <input
+                            type="number"
+                            id="currentAmount"
+                            name="currentAmount"
+                            value={newGoal.currentAmount}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="deadline">Deadline</label>
                         <input
                             type="date"
-                            id="due_date"
-                            name="due_date"
-                            value={newGoal.due_date}
+                            id="deadline"
+                            name="deadline"
+                            value={newGoal.deadline}
                             onChange={handleChange}
                             required
                         />
@@ -113,15 +98,15 @@ function GoalSetting() {
             <h3>Active Goals</h3>
             <div className="goal-list">
                 {activeGoals.map((goal) => (
-                    <div key={goal.goal_id} className="goal-item card">
-                        <h4>{goal.goal_type}</h4>
-                        <p>Target: ${goal.target_amount}</p>
-                        <p>Current: ${goal.current_amount}</p>
-                        <p>Deadline: {goal.due_date}</p>
+                    <div key={goal.id} className="goal-item card">
+                        <h4>{goal.name}</h4>
+                        <p>Target: ${goal.targetAmount}</p>
+                        <p>Current: ${goal.currentAmount}</p>
+                        <p>Deadline: {goal.deadline}</p>
                         <div className="progress-bar">
-                            <div
-                                className="progress"
-                                style={{ width: `${(goal.current_amount / goal.target_amount) * 100}%` }}
+                            <div 
+                                className="progress" 
+                                style={{width: `${(goal.currentAmount / goal.targetAmount) * 100}%`}}
                             ></div>
                         </div>
                     </div>
@@ -131,10 +116,10 @@ function GoalSetting() {
             <h3>Completed Goals</h3>
             <div className="goal-list">
                 {completedGoals.map((goal) => (
-                    <div key={goal.goal_id} className="goal-item card completed">
-                        <h4>{goal.goal_type}</h4>
-                        <p>Target: ${goal.target_amount}</p>
-                        <p>Completed On: {goal.due_date}</p>
+                    <div key={goal.id} className="goal-item card completed">
+                        <h4>{goal.name}</h4>
+                        <p>Target: ${goal.targetAmount}</p>
+                        <p>Completed On: {goal.deadline}</p>
                     </div>
                 ))}
             </div>
