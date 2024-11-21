@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import './login.css';
 
 const logo = process.env.PUBLIC_URL + 'econoMe_logo.png';
 
 const Login = () => {
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate();
   const [isRegistering, setIsRegistering] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); // State to show errors
+  const [errorMessage, setErrorMessage] = useState('');
+
 
   // Handle Login Submit
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
-    setErrorMessage(''); // Clear any previous error message
+    setErrorMessage('');
 
     try {
       const response = await fetch("http://127.0.0.1:8000/login", {
@@ -27,32 +28,32 @@ const Login = () => {
       });
 
       if (!response.ok) {
-        if (response.status === 401) {
-          setErrorMessage("Invalid email or password. Please try again."); // Show error for invalid credentials
-        } else {
-          setErrorMessage("An error occurred while logging in. Please try again later."); // Generic error message
-        }
-        return; // Stop execution if login fails
+        setErrorMessage(
+          response.status === 401
+            ? "Invalid email or password. Please try again."
+            : "An error occurred while logging in. Please try again later."
+        );
+        return;
       }
 
       const data = await response.json();
       console.log("Login successful:", data);
 
-      // Store user ID in localStorage
-      localStorage.setItem("user_id", data.user.user_id);
+      // Store JWT token in localStorage
+      localStorage.setItem("access_token", data.access_token);
 
-      // Redirect to dashboard on success
+      // Redirect to dashboard
       navigate('/dashboard');
     } catch (error) {
       console.error("Error during login:", error);
-      setErrorMessage("An unexpected error occurred. Please try again later."); // Catch unexpected errors
+      setErrorMessage("An unexpected error occurred. Please try again later.");
     }
   };
 
   // Handle Register Submit
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
-    setErrorMessage(''); // Clear any previous error message
+    setErrorMessage('');
 
     try {
       const response = await fetch("http://127.0.0.1:8000/register", {
@@ -60,29 +61,28 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ 
-          user_id: Date.now(), 
-          name, 
-          email, 
-          password, 
-          dob: "2000-01-01", 
-          income: 0 
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          dob: "2000-01-01", // Placeholder date
+          income: 0, // Placeholder income
         }),
       });
 
       if (!response.ok) {
-        setErrorMessage("Registration failed. Please try again."); // Show error for failed registration
+        setErrorMessage("Registration failed. Please try again.");
         return;
       }
 
       const data = await response.json();
       console.log("Registration successful:", data);
 
-      // Switch to login mode after successful registration
+      // Switch to login mode
       setIsRegistering(false);
     } catch (error) {
       console.error("Error during registration:", error);
-      setErrorMessage("An unexpected error occurred. Please try again later."); // Catch unexpected errors
+      setErrorMessage("An unexpected error occurred. Please try again later.");
     }
   };
 
@@ -90,32 +90,32 @@ const Login = () => {
     <div className="login-container">
       <img src={logo} alt="EconoME Logo" className="logo" />
       <div className="login-register-forms">
-        {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Display errors */}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
 
         {isRegistering ? (
           <div className="register-form">
             <h2>Register</h2>
             <form onSubmit={handleRegisterSubmit}>
-              <input 
-                type="text" 
-                placeholder="Full Name" 
-                value={name} 
-                onChange={(e) => setName(e.target.value)} 
-                required 
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
               />
-              <input 
-                type="email" 
-                placeholder="Email" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
-                required 
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
-              <input 
-                type="password" 
-                placeholder="Password" 
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)} 
-                required 
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
               <button type="submit" className="register-button">Register</button>
             </form>
@@ -124,19 +124,19 @@ const Login = () => {
           <div className="login-form">
             <h2>Login</h2>
             <form onSubmit={handleLoginSubmit}>
-              <input 
-                type="email" 
-                placeholder="Email" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
-                required 
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
-              <input 
-                type="password" 
-                placeholder="Password" 
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)} 
-                required 
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
               <button type="submit" className="login-button">Login</button>
             </form>
@@ -145,14 +145,14 @@ const Login = () => {
       </div>
 
       <div className="toggle-buttons">
-        <button 
-          onClick={() => setIsRegistering(false)} 
+        <button
+          onClick={() => setIsRegistering(false)}
           className={`toggle-button ${!isRegistering ? 'active' : ''}`}
         >
           Login
         </button>
-        <button 
-          onClick={() => setIsRegistering(true)} 
+        <button
+          onClick={() => setIsRegistering(true)}
           className={`toggle-button ${isRegistering ? 'active' : ''}`}
         >
           Register
