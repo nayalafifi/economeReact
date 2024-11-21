@@ -44,14 +44,6 @@ const Sidebar = () => {
               Goal Setting
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/dashboard/settings"
-              className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-            >
-              Settings
-            </NavLink>
-          </li>
         </ul>
       </nav>
     </aside>
