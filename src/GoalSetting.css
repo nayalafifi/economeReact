@@ -52,7 +52,7 @@
 
 .form-group input:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: #1c4d30;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
@@ -71,13 +71,13 @@
 }
 
 .btn-primary {
-  background-color: #3b82f6;
+  background-color: #1c4d30;
   color: white;
   grid-column: span 2;
 }
 
 .btn-primary:hover {
-  background-color: #2563eb;
+  background-color: #1c4d30;
 }
 
 .goal-list {
@@ -116,7 +116,7 @@
 
 .progress {
   height: 100%;
-  background-color: #3b82f6;
+  background-color: #1c4d30;
   transition: width 0.3s ease;
 }
 

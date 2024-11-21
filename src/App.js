@@ -1,12 +1,12 @@
 import React from 'react';
-import { Routes, Route, Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Outlet } from 'react-router-dom';
 import Dashboard from './dashboard';
 import Profile from './Profile';
 import GoalSetting from './GoalSetting';
 import Login from './login';
 import Marketplace from './Marketplace';
 import Landing from './landing';
-import Sidebar from './sidebar'; 
+import Sidebar from './sidebar';
 
 function App() {
   return (
@@ -32,18 +32,24 @@ function App() {
 
 function LoginWrapper() {
   const navigate = useNavigate();
+
   const handleLoginSuccess = () => {
-    navigate('/dashboard'); 
+    navigate('/dashboard'); // Redirect to the dashboard after a successful login
   };
-  return <Login onLoginSuccess={handleLoginSuccess} />;
+
+  const handleRegisterSuccess = () => {
+    navigate('/login'); // Redirect to the login page after a successful registration
+  };
+
+  return <Login onLoginSuccess={handleLoginSuccess} onRegisterSuccess={handleRegisterSuccess} />;
 }
 
 function DashboardLayout() {
   return (
     <div className="dashboard">
-      <Sidebar />  
+      <Sidebar />
       <main className="main-content">
-        <Outlet /> 
+        <Outlet />
       </main>
     </div>
   );

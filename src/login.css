@@ -12,10 +12,11 @@ body{
 }
 
 /* Logo styling */
-.logo {
+.login-container .logo {
   width: 300px;
-  margin-bottom: 0px;
+  margin-bottom:0px;
 }
+
 
 /* Toggle button container */
 .toggle-buttons {
@@ -42,11 +43,12 @@ body{
 
 /* Form container */
 .login-register-forms {
-  padding: 2rem;
+  padding: 1.5rem;
   width: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top:0px;
 }
 
 .login-register-forms .register-form {
@@ -88,7 +90,7 @@ input:focus {
 
 /* Button styling */
 .login-button, .register-button {
-  width: 100%;
+  width: 108%;
   display: block;
   padding: 0.75rem;
   margin-left: auto;
@@ -117,12 +119,3 @@ input:focus {
   margin: 0px;
   font-family: 'Roboto', sans-serif;
 }
-
-
-/* Footer styling */
-.footer {
-  margin-top: 2rem;
-  font-size: 0.9rem;
-  color: #6b7280;
-}
-
