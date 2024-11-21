@@ -27,8 +27,8 @@ body{
 /* Toggle button styling */
 .toggle-button {
   background-color: transparent;
-  color: #da4b39;
-  border: 1px solid #da4b39;
+  color: #1c4d30;
+  border: 1px solid #1c4d30;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
@@ -36,7 +36,7 @@ body{
 }
 
 .toggle-button.active {
-  background-color: #da4b39;
+  background-color: #1c4d30;
   color: #ffffff;
 }
 
@@ -80,7 +80,7 @@ input:focus {
   padding: 0.75rem;
   margin-left: auto;
   margin-right: auto;
-  background-color: #da4b39;
+  background-color: #1c4d30;
   color: #ffffff;
   border: none;
   border-radius: 20px;
@@ -90,12 +90,16 @@ input:focus {
 }
 
 .login-button:hover, .register-button:hover {
-  background-color: #2563eb;
+  background-color: #da4b39;
   transform: translateY(-2px);
 }
 
 .login-button:active, .register-button:active {
-  background-color: #1d4ed8;
+  background-color: #da4b39;
   transform: translateY(0);
+}
+
+.login-register-forms h2{
+  margin-bottom: 1rem;
 }
 

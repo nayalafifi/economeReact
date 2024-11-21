@@ -58,6 +58,28 @@ const Login = ({ onLoginSuccess }) => {
   return (
     <div className="login-container">
       <img src={logo} alt="EconoME Logo" className="logo" />
+      <div className="login-register-forms">
+        {isRegistering ? (
+          <div className="register-form">
+            <h2>Register</h2>
+            <form onSubmit={handleRegisterSubmit}>
+              <input type="text" placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} required />
+              <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              <button type="submit" className="register-button">Register</button>
+            </form>
+          </div>
+        ) : (
+          <div className="login-form">
+            <h2>Login</h2>
+            <form onSubmit={handleLoginSubmit}>
+              <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              <button type="submit" className="login-button">Login</button>
+            </form>
+          </div>
+        )}
+      </div>
       <div className="toggle-buttons">
         <button 
           onClick={() => setIsRegistering(false)} 
@@ -71,26 +93,6 @@ const Login = ({ onLoginSuccess }) => {
         >
           Register
         </button>
-      </div>
-      <div className="login-register-forms">
-        {isRegistering ? (
-          <div className="register-form">
-            <form onSubmit={handleRegisterSubmit}>
-              <input type="text" placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} required />
-              <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-              <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-              <button type="submit" className="register-button">Register</button>
-            </form>
-          </div>
-        ) : (
-          <div className="login-form">
-            <form onSubmit={handleLoginSubmit}>
-              <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-              <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-              <button type="submit" className="login-button">Login</button>
-            </form>
-          </div>
-        )}
       </div>
     </div>
   );
