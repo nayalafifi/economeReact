@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './login.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./login.css";
 
-const logo = process.env.PUBLIC_URL + 'econoMe_logo.png';
+const logo = process.env.PUBLIC_URL + "econoMe_logo.png";
 
 const Login = () => {
   const navigate = useNavigate();
   const [isRegistering, setIsRegistering] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Handle Login Submit
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
-    setErrorMessage('');
+    setErrorMessage("");
 
     try {
+      // Login API call
       const response = await fetch("http://127.0.0.1:8000/login", {
         method: "POST",
         headers: {
@@ -36,25 +36,26 @@ const Login = () => {
         return;
       }
 
-      const data = await response.json();
-      console.log("Login successful:", data);
+      const loginData = await response.json();
+      console.log("Login successful:", loginData);
 
-      // Store JWT token in localStorage
-      localStorage.setItem("access_token", data.access_token);
+      // Store user data in localStorage
+      const user = loginData.user;
+      localStorage.setItem("user_id", user.user_id);
+      localStorage.setItem("email", user.email);
 
       // Redirect to dashboard
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error during login:", error);
       setErrorMessage("An unexpected error occurred. Please try again later.");
     }
   };
 
-  // Handle Register Submit
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
-    setErrorMessage('');
-
+    setErrorMessage("");
+  
     try {
       const response = await fetch("http://127.0.0.1:8000/register", {
         method: "POST",
@@ -69,23 +70,20 @@ const Login = () => {
           income: 0, // Placeholder income
         }),
       });
-
+  
       if (!response.ok) {
         setErrorMessage("Registration failed. Please try again.");
         return;
       }
-
+  
       const data = await response.json();
       console.log("Registration successful:", data);
-
-      // Switch to login mode
-      setIsRegistering(false);
     } catch (error) {
       console.error("Error during registration:", error);
       setErrorMessage("An unexpected error occurred. Please try again later.");
     }
   };
-
+  
   return (
     <div className="login-container">
       <img src={logo} alt="EconoME Logo" className="logo" />
@@ -117,7 +115,9 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <button type="submit" className="register-button">Register</button>
+              <button type="submit" className="register-button">
+                Register
+              </button>
             </form>
           </div>
         ) : (
@@ -138,7 +138,9 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <button type="submit" className="login-button">Login</button>
+              <button type="submit" className="login-button">
+                Login
+              </button>
             </form>
           </div>
         )}
@@ -147,13 +149,13 @@ const Login = () => {
       <div className="toggle-buttons">
         <button
           onClick={() => setIsRegistering(false)}
-          className={`toggle-button ${!isRegistering ? 'active' : ''}`}
+          className={`toggle-button ${!isRegistering ? "active" : ""}`}
         >
           Login
         </button>
         <button
           onClick={() => setIsRegistering(true)}
-          className={`toggle-button ${isRegistering ? 'active' : ''}`}
+          className={`toggle-button ${isRegistering ? "active" : ""}`}
         >
           Register
         </button>

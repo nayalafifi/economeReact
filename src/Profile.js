@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import './Profile.css';
+import React, { useEffect, useState } from "react";
+import "./Profile.css";
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -7,18 +7,27 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchUserInfo = async () => {
-      const userId = localStorage.getItem("user_id"); // Get user ID from localStorage
-      if (!userId) {
-        setError("User ID not found");
-        return;
-      }
-
       try {
-        const response = await fetch(`http://127.0.0.1:8000/users/${userId}`);
-        if (!response.ok) throw new Error("Failed to fetch user info");
+        // Get the email from localStorage
+        const email = localStorage.getItem("email");
+        if (!email) {
+          setError("User email not found. Please log in again.");
+          return;
+        }
 
-        const data = await response.json();
-        setUserInfo(data);
+        // Fetch the user details using the email
+        const emailResponse = await fetch(`http://127.0.0.1:8000/users/email/${email}`);
+        if (!emailResponse.ok) throw new Error("Failed to fetch user ID");
+
+        const emailData = await emailResponse.json();
+
+        // Fetch the user details using the user_id
+        const userId = emailData.user_id;
+        const userResponse = await fetch(`http://127.0.0.1:8000/users/${userId}`);
+        if (!userResponse.ok) throw new Error("Failed to fetch user info");
+
+        const userData = await userResponse.json();
+        setUserInfo(userData);
       } catch (error) {
         console.error("Error fetching user info:", error);
         setError(error.message);

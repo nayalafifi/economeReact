@@ -1,60 +1,85 @@
-import React, { useEffect, useState } from 'react';
-import { fetchUsers } from './api';
-import './dashboard.css';
+import React, { useEffect, useState } from "react";
+import "./dashboard.css";
 
-
-const logo = process.env.PUBLIC_URL + 'econoMe_logo.png';
+const logo = process.env.PUBLIC_URL + "/econoMe_logo.png";
 
 const Dashboard = () => {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const loadUsers = async () => {
+    const fetchUser = async () => {
+      const userId = localStorage.getItem("user_id"); // Get user_id from localStorage
+      if (!userId) {
+        setError("No user data found. Please log in again.");
+        return;
+      }
+
       try {
-        const userData = await fetchUsers();
-        setUsers(userData);
+        const response = await fetch(`http://127.0.0.1:8000/users/${userId}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+        const data = await response.json();
+        setUser(data);
       } catch (error) {
-        console.error("Error fetching users:", error);
-        setError("Failed to load users");
-      } finally {
-        setLoading(false);
+        console.error("Error fetching user data:", error);
+        setError(error.message);
       }
     };
 
-    loadUsers();
+    fetchUser();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (error) return <div className="error-message">{error}</div>;
+  if (!user) return <div>Loading...</div>;
 
   return (
     <div className="dashboard">
       <header className="dashboard-header">
         <h2>Dashboard</h2>
         <button className="btn btn-primary">Add widget</button>
-        {/* Logo added here */}
-        <img src={logo} alt="Logo" className="logo" />
+        {/* <img src={logo} alt="EconoME Logo" className="logo" /> */}
       </header>
 
       <main className="main-content">
+        {/* User Information */}
+        <div className="user-info">
+          <h3>User Information</h3>
+          <div className="user-card">
+            <p><strong>Name:</strong> {user.name}</p>
+            <p><strong>Email:</strong> {user.email}</p>
+            <p><strong>Date of Birth:</strong> {user.dob}</p>
+            <p><strong>Income:</strong> ${user.income}</p>
+          </div>
+        </div>
+
         {/* Progress Cards */}
         <div className="card-grid">
-          {['Budget', 'Goal 1', 'Goal 2'].map((title, index) => (
-            <div key={index} className="card">
-              <h3 className="card-title">{title}</h3>
-              <div className="card-content">
-                <span className="percentage">{[25, 79, 52][index]}%</span>
-              </div>
+          <div className="card">
+            <h3 className="card-title">Budget</h3>
+            <div className="card-content">
+              <span className="percentage">25%</span>
             </div>
-          ))}
+          </div>
+          <div className="card">
+            <h3 className="card-title">Goal 1</h3>
+            <div className="card-content">
+              <span className="percentage">79%</span>
+            </div>
+          </div>
+          <div className="card">
+            <h3 className="card-title">Goal 2</h3>
+            <div className="card-content">
+              <span className="percentage">52%</span>
+            </div>
+          </div>
         </div>
 
         {/* Expenses Chart */}
         <div className="card">
           <h3 className="card-title">Expenses</h3>
-          <div className="chart-placeholder"></div>
+          <div className="chart-placeholder">[Chart Placeholder]</div>
         </div>
 
         {/* Weekly Expenses Table */}
